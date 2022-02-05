@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import React from 'react';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 const Search = ({ word, setWord, handleSubmit }) => {
   return (
