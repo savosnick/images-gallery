@@ -31,9 +31,14 @@ const App = () => {
     setImages(images.filter((image) => image.id !== id));
   };
 
+  const clearPage = () => {
+    setImages([]);
+    setWord('');
+  };
+
   return (
     <div>
-      <Header title="Images Gallery" />
+      <Header title="Images Gallery" clearPage={clearPage} />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
       <Container className="mt-4">
         {images.length ? (
