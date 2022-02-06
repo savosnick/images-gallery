@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, NavbarBrand, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { ReactComponent as Logo } from '../images/logo.svg';
 
 const navbarStyle = {
