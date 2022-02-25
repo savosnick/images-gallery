@@ -9,7 +9,8 @@ services:
       - /app/node_modules
       - ./frontend:/app
     environment:
-      - CHOKIDAR_USEPOLLING=true
+      - FAST_REFRESH=false
+      - CHOKIDAR_USEPOLLING= 'true'
   api:
     restart: always
     build: ./api

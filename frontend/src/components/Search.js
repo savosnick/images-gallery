@@ -18,7 +18,7 @@ const Search = ({ word, setWord, handleSubmit }) => {
               </Col>
               <Col>
                 <Button variant="primary" disabled={!word} type="submit">
-                  Search Images Today
+                  Search Images
                 </Button>
               </Col>
             </Form.Row>
