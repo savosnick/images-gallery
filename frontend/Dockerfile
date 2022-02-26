@@ -1,8 +1,8 @@
-FROM node:15.14-alpine
+FROM node:17.5.0-alpine
 
 WORKDIR /app
 
-EXPOSE 3000
+EXPOSE 8000
 
 COPY package.json package-lock.json ./
 
@@ -10,4 +10,4 @@ RUN npm install --silent
 
 COPY . ./
 
-CMD ["npm", "start"]
+CMD ["npm", "start -- --port 8000"]
