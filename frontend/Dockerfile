@@ -2,7 +2,7 @@ FROM node:17.5.0-alpine
 
 WORKDIR /app
 
-EXPOSE 8000
+EXPOSE 3000
 
 COPY package.json package-lock.json ./
 
@@ -10,4 +10,4 @@ RUN npm install --silent
 
 COPY . ./
 
-CMD ["npm", "start -- --port 8000"]
+CMD ["npm", "start"]
