@@ -1,17 +1,20 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
-const ImageCard = ({ image, DeleteImage }) => {
+const ImageCard = ({ image, deleteImage, saveImage }) => {
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={image.urls.small} />
       <Card.Body>
         <Card.Title>
-          {image.title[0].toUpperCase() + image.title.slice(1)}
+          {image.title?.[0].toUpperCase() + image.title?.slice(1)}
         </Card.Title>
         <Card.Text>{image.description || image.alt_description}</Card.Text>
-        <Button variant="primary" onClick={() => DeleteImage(image.id)}>
+        <Button variant="primary" onClick={() => deleteImage(image.id)}>
           Delete
+        </Button>{' '}
+        <Button variant="secondary" onClick={() => saveImage(image.id)}>
+          Save
         </Button>
       </Card.Body>
     </Card>
