@@ -1,3 +1,4 @@
+from crypt import methods
 import os
 from dotenv import load_dotenv
 import requests
@@ -50,6 +51,17 @@ def images():
         result = images_collection.insert_one(image)
         inserted_id = result.inserted_id
         return {"inserted_id": inserted_id}
+
+
+@app.route("/images/<image_id>", methods=["DELETE"])
+def del_image(image_id):
+    if request.method == "DELETE":
+        result = images_collection.delete_one({"_id": image_id})
+        if not result:
+            return {"error": "Image was not deleted. Please try again"}, 500
+        if result.deleted_count:
+            return {"deleted_id": image_id}
+        return {"error": "Image not found"}, 404
 
 
 if __name__ == "__main__":
