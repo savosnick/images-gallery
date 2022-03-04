@@ -44,6 +44,7 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
+    setImages(images.filter((image) => image.id !== id));
   };
 
   const handleSaveImage = async (id) => {
