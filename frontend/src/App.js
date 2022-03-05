@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Search from './components/Search';
 import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
+import Spinner from './components/Spinner';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5050';
@@ -12,16 +13,18 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5050';
 const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getSavedImages = async () => {
     try {
       const res = await axios.get(`${API_URL}/images`);
       setImages(res.data || []);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
-
+  <Spinner />;
   useEffect(() => getSavedImages(), []);
 
   const handleSearchSubmit = async (e) => {
@@ -69,29 +72,42 @@ const App = () => {
     setWord('');
   };
 
-  return (
-    <div>
-      <Header title="Images Gallery" clearPage={clearPage} />
-      <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
-      <Container className="mt-4">
-        {images.length ? (
-          <Row xs={1} md={2} lg={3}>
-            {images.map((image, i) => (
-              <Col key={i} className="pb-3">
-                <ImageCard
-                  image={image}
-                  deleteImage={handleDeleteImage}
-                  saveImage={handleSaveImage}
-                />
-              </Col>
-            ))}
-          </Row>
-        ) : (
-          <Welcome />
-        )}
-      </Container>
-    </div>
-  );
+  if (loading) {
+    return (
+      <div>
+        <Header title="Images Gallery" clearPage={clearPage} />
+        <Spinner />;
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Header title="Images Gallery" clearPage={clearPage} />
+        <Search
+          word={word}
+          setWord={setWord}
+          handleSubmit={handleSearchSubmit}
+        />
+        <Container className="mt-4">
+          {images.length ? (
+            <Row xs={1} md={2} lg={3}>
+              {images.map((image, i) => (
+                <Col key={i} className="pb-3">
+                  <ImageCard
+                    image={image}
+                    deleteImage={handleDeleteImage}
+                    saveImage={handleSaveImage}
+                  />
+                </Col>
+              ))}
+            </Row>
+          ) : (
+            <Welcome />
+          )}
+        </Container>
+      </div>
+    );
+  }
 };
 
 export default App;
