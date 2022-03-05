@@ -10,6 +10,7 @@ const Spinner = () => {
         left: '50%',
       }}
       animation="border"
+      variant="primary"
     />
   );
 };
