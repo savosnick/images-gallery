@@ -7,6 +7,8 @@ import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
 import Spinner from './components/Spinner';
 import { Container, Row, Col } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5050';
 
@@ -24,7 +26,6 @@ const App = () => {
       console.log(error);
     }
   };
-  <Spinner />;
   useEffect(() => getSavedImages(), []);
 
   const handleSearchSubmit = async (e) => {
@@ -101,6 +102,7 @@ const App = () => {
               <Welcome />
             )}
           </Container>
+          <ToastContainer />
         </>
       )}
     </div>
