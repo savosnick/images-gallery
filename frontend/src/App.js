@@ -22,8 +22,9 @@ const App = () => {
       const res = await axios.get(`${API_URL}/images`);
       setImages(res.data || []);
       setLoading(false);
+      toast.success('Saved images downloaded');
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
   useEffect(() => getSavedImages(), []);
@@ -33,20 +34,24 @@ const App = () => {
     try {
       const res = await axios.get(`${API_URL}/new-image?query=${word}`);
       setImages([{ ...res.data, title: word }, ...images]);
+      toast.info('New Image ' + word.toUpperCase() + ' was found');
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
     setWord('');
   };
 
   const handleDeleteImage = async (id) => {
     try {
+      const imageToBeDeleted = images.find((image) => image.id === id);
+      const imageTitle = imageToBeDeleted.title;
       const res = await axios.delete(`${API_URL}/images/${id}`);
       if (res.data?.deleted_id) {
         setImages(images.filter((image) => image.id !== id));
+        toast.warning('Image ' + imageTitle.toUpperCase() + ' was deleted');
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
     setImages(images.filter((image) => image.id !== id));
   };
@@ -62,9 +67,12 @@ const App = () => {
             image.id === id ? { ...image, saved: true } : image
           )
         );
+        toast.info(
+          'Image ' + imageToBeSaved.title.toUpperCase() + ' was saved'
+        );
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 
@@ -102,7 +110,7 @@ const App = () => {
               <Welcome />
             )}
           </Container>
-          <ToastContainer />
+          <ToastContainer position="bottom-right" autoClose={2000} />
         </>
       )}
     </div>
