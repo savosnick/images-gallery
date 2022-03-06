@@ -1,5 +1,16 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Nav } from 'react-bootstrap';
+
+const Author = (image) => {
+  if (image.user.portfolio_url)
+    return (
+      <Nav.Link href={image.user.portfolio_url} target="_blank">
+        {image.user.name}
+      </Nav.Link>
+    );
+  else if (image.user.name) return image.user.name;
+  else return 'No author name';
+};
 
 const ImageCard = ({ image, deleteImage, saveImage }) => {
   return (
@@ -19,6 +30,7 @@ const ImageCard = ({ image, deleteImage, saveImage }) => {
           </Button>
         )}
       </Card.Body>
+      <Card.Footer className="text-center">{Author(image)}</Card.Footer>
     </Card>
   );
 };
