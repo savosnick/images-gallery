@@ -24,7 +24,7 @@ const App = () => {
       setLoading(false);
       toast.success('Saved images downloaded');
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
   useEffect(() => getSavedImages(), []);
@@ -36,7 +36,7 @@ const App = () => {
       setImages([{ ...res.data, title: word }, ...images]);
       toast.info('New Image ' + word.toUpperCase() + ' was found');
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
     setWord('');
   };
@@ -51,7 +51,7 @@ const App = () => {
         toast.warning('Image ' + imageTitle.toUpperCase() + ' was deleted');
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
     setImages(images.filter((image) => image.id !== id));
   };
@@ -72,7 +72,7 @@ const App = () => {
         );
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
